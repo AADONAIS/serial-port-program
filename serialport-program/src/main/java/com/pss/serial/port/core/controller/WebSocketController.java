@@ -17,8 +17,16 @@ public class WebSocketController {
     public int size;
 
     @Value("${baud.rate}")
-    private String baudRate ;
+    public int baudRate ;
 
+    @Value("${port.name}")
+    public String portName ;
+
+    @Value("${data.bits}")
+    public int dataBits ;
+
+    @Value("${stop.bits}")
+    public int stopBits ;
 
     /**
      * 群发消息内容

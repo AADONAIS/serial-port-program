@@ -37,6 +37,14 @@ public class SerialWebsocket {
 
     private int size = SpringUtil.getBean(WebSocketController.class).size;
 
+    private String portName = SpringUtil.getBean(WebSocketController.class).portName ;
+
+    private int baudRate = SpringUtil.getBean(WebSocketController.class).baudRate ;
+
+    private int dataBits = SpringUtil.getBean(WebSocketController.class).dataBits ;
+
+    private int stopBits = SpringUtil.getBean(WebSocketController.class).stopBits ;
+
     /**
      * 连接建立成功调用的方法
      */
@@ -60,7 +68,7 @@ public class SerialWebsocket {
             if (portId.getPortType() == CommPortIdentifier.PORT_SERIAL) {
                 System.out.println(portId.getName());
                 // 选取我们需要的串口端口
-                if (portId.getName().equals("COM1")) {
+                if (portId.getName().equals(portName)) {
                     port = portId;
                 }
             }
@@ -84,8 +92,8 @@ public class SerialWebsocket {
         }
 
         try {
-            serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8,
-                    SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+            serialPort.setSerialPortParams(baudRate, dataBits,
+                    stopBits, SerialPort.PARITY_NONE);
         } catch (UnsupportedCommOperationException e) {
             e.printStackTrace();
         }
