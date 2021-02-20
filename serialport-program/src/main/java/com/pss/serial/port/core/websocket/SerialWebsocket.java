@@ -91,7 +91,7 @@ public class SerialWebsocket {
             e.printStackTrace();
         }
 
-        byte[] readAarray = new byte[bufferSize];
+//        byte[] readAarray = new byte[bufferSize];
         log.info("[{}]", "开启websocket , 开始监听数据");
         try {
             while (true) {
@@ -104,22 +104,20 @@ public class SerialWebsocket {
 //                    int read = inputStream.read();
 //                    str += new String(readAarray,0, readAarray.length).trim();
 //                }
-                    if (inputStream.available() == 0) continue;
-//                    while (readAarray.length<bufferSize) {
-                    //初始化byte数组
-                    while (inputStream.available()<bufferSize){
-
+                    while (true){
+                        int read = inputStream.read();
+                        stringBuilder.append(read);
+                        if (stringBuilder.toString().contains("\r\n")){
+                            break;
+                        }
                     }
-                    inputStream.read(readAarray);
-                    stringBuilder.append(new String(readAarray));
                     inputStream.close();
 //                    String s = bytesToHexString(readAarray);
 //                    for (byte b : readAarray) {
 //                        stringBuilder.append(b);
 //                    }
-//                    }
 
-                    if (StringUtils.isBlank(stringBuilder)) continue;
+//                    if (StringUtils.isBlank(stringBuilder)) continue;
 
                     // 将读出的字符数组数据，直接转换成十六进制。
 //                StringToHex.printHexString(readB);
