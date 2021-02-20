@@ -4,11 +4,8 @@ package com.pss.serial.port.core.websocket;
 import com.pss.serial.port.core.controller.WebSocketController;
 import com.pss.serial.port.core.exception.BusinessException;
 import com.pss.serial.port.core.utils.SpringUtil;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import purejavacomm.CommPortIdentifier;
 import purejavacomm.PortInUseException;
@@ -22,8 +19,6 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Slf4j
 @ServerEndpoint(value = "/websocket") //接受websocket请求路径
@@ -35,15 +30,15 @@ public class SerialWebsocket {
     // concurrent包的线程安全Set，用来存放每个客户端对应的Session对象。
     private static CopyOnWriteArraySet<Session> SessionSet = new CopyOnWriteArraySet<Session>();
 
-    private int size = SpringUtil.getBean(WebSocketController.class).size;
+    private int bufferSize = SpringUtil.getBean(WebSocketController.class).bufferSize;
 
-    private String portName = SpringUtil.getBean(WebSocketController.class).portName ;
+    private String portName = SpringUtil.getBean(WebSocketController.class).portName;
 
-    private int baudRate = SpringUtil.getBean(WebSocketController.class).baudRate ;
+    private int baudRate = SpringUtil.getBean(WebSocketController.class).baudRate;
 
-    private int dataBits = SpringUtil.getBean(WebSocketController.class).dataBits ;
+    private int dataBits = SpringUtil.getBean(WebSocketController.class).dataBits;
 
-    private int stopBits = SpringUtil.getBean(WebSocketController.class).stopBits ;
+    private int stopBits = SpringUtil.getBean(WebSocketController.class).stopBits;
 
     /**
      * 连接建立成功调用的方法
@@ -84,10 +79,8 @@ public class SerialWebsocket {
             // 打开串口
             serialPort = (SerialPort) port.open("Main", 2000);
             // 获取串口的输入流对象
-            inputStream = serialPort.getInputStream();
+//            inputStream = serialPort.getInputStream();
         } catch (PortInUseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -98,46 +91,56 @@ public class SerialWebsocket {
             e.printStackTrace();
         }
 
-        byte[] readAarray = new byte[size];
+        byte[] readAarray = new byte[bufferSize];
         log.info("[{}]", "开启websocket , 开始监听数据");
         try {
             while (true) {
 //            log.info("into while .....");
                 try {
+                    inputStream = serialPort.getInputStream();
+
                     StringBuilder stringBuilder = new StringBuilder();
 //                while (inputStream.available()!=0) {
 //                    int read = inputStream.read();
 //                    str += new String(readAarray,0, readAarray.length).trim();
 //                }
                     if (inputStream.available() == 0) continue;
-                    while (inputStream.available() != 0) {
-                        //初始化byte数组
-                        inputStream.read(readAarray);
-                        stringBuilder.append(new String(readAarray));
+//                    while (readAarray.length<bufferSize) {
+                    //初始化byte数组
+                    while (inputStream.available()<bufferSize){
+
                     }
+                    inputStream.read(readAarray);
+                    stringBuilder.append(new String(readAarray));
+                    inputStream.close();
+//                    String s = bytesToHexString(readAarray);
+//                    for (byte b : readAarray) {
+//                        stringBuilder.append(b);
+//                    }
+//                    }
+
                     if (StringUtils.isBlank(stringBuilder)) continue;
 
                     // 将读出的字符数组数据，直接转换成十六进制。
 //                StringToHex.printHexString(readB);
-                    Pattern pattern = Pattern.compile("\\d+.\\d+");
-                    Matcher matcher = pattern.matcher(stringBuilder);
-                    if (!matcher.find()) {
-                        continue;
-                    }
+//                    Pattern pattern = Pattern.compile("\\d+[.]\\d+");
+//                    Matcher matcher = pattern.matcher(stringBuilder);
+//                    if (!matcher.find()) {
+//                        continue;
+//                    }
 
-                    String str = matcher.group(0);
+//                    String str = matcher.group(0);
+                    String str = stringBuilder.toString();
 
 
 //                log.info("transform data ....");
                     System.out.println(str);
 //                log.info("接收到的重量为:" + str);
-                    Thread.sleep(20);
+                    Thread.sleep(150);
                     SerialWebsocket.SendMessage(session, str);
 //                log.info("send message ......");
 //                log.info("[{}]" , "发送消息成功,消息内容为:" + new String(readB));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -149,6 +152,23 @@ public class SerialWebsocket {
                 e.printStackTrace();
             }
         }
+    }
+
+    //字节转换成十六进制字符串
+    public static String bytesToHexString(byte[] src) {
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        for (int i = 0; i < src.length; i++) {
+            int v = src[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString();
     }
 
     /**

@@ -14,7 +14,7 @@ import java.io.IOException;
 public class WebSocketController {
 
     @Value("${buffer.size}")
-    public int size;
+    public int bufferSize;
 
     @Value("${baud.rate}")
     public int baudRate ;
