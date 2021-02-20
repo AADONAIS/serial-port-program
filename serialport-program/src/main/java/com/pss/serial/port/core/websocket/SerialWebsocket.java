@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Slf4j
 @ServerEndpoint(value = "/websocket") //接受websocket请求路径
@@ -91,7 +93,7 @@ public class SerialWebsocket {
             e.printStackTrace();
         }
 
-//        byte[] readAarray = new byte[bufferSize];
+        byte[] readAarray = new byte[1];
         log.info("[{}]", "开启websocket , 开始监听数据");
         try {
             while (true) {
@@ -105,13 +107,13 @@ public class SerialWebsocket {
 //                    str += new String(readAarray,0, readAarray.length).trim();
 //                }
                     while (true){
-                        int read = inputStream.read();
-                        stringBuilder.append(read);
+                        inputStream.read(readAarray);
+                        stringBuilder.append(new String(readAarray));
                         if (stringBuilder.toString().contains("\r\n")){
                             break;
                         }
                     }
-                    inputStream.close();
+//                    inputStream.close();
 //                    String s = bytesToHexString(readAarray);
 //                    for (byte b : readAarray) {
 //                        stringBuilder.append(b);
@@ -121,20 +123,23 @@ public class SerialWebsocket {
 
                     // 将读出的字符数组数据，直接转换成十六进制。
 //                StringToHex.printHexString(readB);
-//                    Pattern pattern = Pattern.compile("\\d+[.]\\d+");
-//                    Matcher matcher = pattern.matcher(stringBuilder);
-//                    if (!matcher.find()) {
-//                        continue;
-//                    }
 
-//                    String str = matcher.group(0);
-                    String str = stringBuilder.toString();
+                    String base = stringBuilder.toString();
+                    base=base.replaceAll("\r\n|\r|\n", "");
+                    //正则筛选需要的字段
+                    Pattern pattern = Pattern.compile("\\d+[.]\\d+");
+                    Matcher matcher = pattern.matcher(stringBuilder);
+                    if (!matcher.find()) {
+                        continue;
+                    }
+                    String str = matcher.group(0);
+//                    String str = stringBuilder.toString();
 
 
 //                log.info("transform data ....");
-                    System.out.println(str);
+                    System.out.println("input:["+base+"]"+",out:["+str+"]");
 //                log.info("接收到的重量为:" + str);
-                    Thread.sleep(150);
+                    Thread.sleep(10);
                     SerialWebsocket.SendMessage(session, str);
 //                log.info("send message ......");
 //                log.info("[{}]" , "发送消息成功,消息内容为:" + new String(readB));
