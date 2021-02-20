@@ -13,19 +13,19 @@ import java.io.IOException;
 @RequestMapping(value = "/api/ws")
 public class WebSocketController {
 
-    @Value("${buffer.size}")
-    public int bufferSize;
+//    @Value("${buffer.size}")
+//    public int bufferSize;
 
-    @Value("${baud.rate}")
+    @Value("${port.baud.rate}")
     public int baudRate ;
 
     @Value("${port.name}")
     public String portName ;
 
-    @Value("${data.bits}")
+    @Value("${port.data.bits}")
     public int dataBits ;
 
-    @Value("${stop.bits}")
+    @Value("${port.stop.bits}")
     public int stopBits ;
 
     /**

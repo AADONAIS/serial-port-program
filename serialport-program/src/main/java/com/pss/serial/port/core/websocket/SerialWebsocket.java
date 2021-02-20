@@ -32,7 +32,7 @@ public class SerialWebsocket {
     // concurrent包的线程安全Set，用来存放每个客户端对应的Session对象。
     private static CopyOnWriteArraySet<Session> SessionSet = new CopyOnWriteArraySet<Session>();
 
-    private int bufferSize = SpringUtil.getBean(WebSocketController.class).bufferSize;
+//    private int bufferSize = SpringUtil.getBean(WebSocketController.class).bufferSize;
 
     private String portName = SpringUtil.getBean(WebSocketController.class).portName;
 
