@@ -15,4 +15,7 @@ public abstract class ConfigEnum {
     public static final int PARITY_MARK = 3;
     public static final int PARITY_SPACE = 4;
 
+
+
+
 }

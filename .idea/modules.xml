@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/serial-port-common/serial-port-common.iml" filepath="$PROJECT_DIR$/serial-port-common/serial-port-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serial-port-core/serial-port-core.iml" filepath="$PROJECT_DIR$/serial-port-core/serial-port-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serial-port-gui/serial-port-gui.iml" filepath="$PROJECT_DIR$/serial-port-gui/serial-port-gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/serial-port-program.iml" filepath="$PROJECT_DIR$/.idea/serial-port-program.iml" />
+    </modules>
+  </component>
+</project>
