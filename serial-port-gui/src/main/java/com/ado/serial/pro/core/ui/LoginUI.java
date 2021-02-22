@@ -20,7 +20,7 @@ public class LoginUI extends JFrame{
 	
 	private JLabel password=new JLabel("请输入验证码:");
 	
-	private JLabel title=new JLabel("Leon-Tony串口");
+	private JLabel title=new JLabel("裴宁串口");
 	
 	private JPasswordField pwdField=new JPasswordField(30);
 	
@@ -35,7 +35,7 @@ public class LoginUI extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
 		
-		title.setBounds(180, 20, 160, 60);
+		title.setBounds(180, 20, 260, 60);
 		title.setFont(new Font("楷体", Font.BOLD, 25));
 		
 		password.setBounds(60, 100, 120, 60);
