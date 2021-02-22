@@ -18,16 +18,16 @@ public class LoginUI extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JLabel password=new JLabel("ÊäÈëÃÜÂë½âËø:");
+	private JLabel password=new JLabel("è¯·è¾“å…¥éªŒè¯ç :");
 	
-	private JLabel title=new JLabel("Leon-Tony´®¿Ú");
+	private JLabel title=new JLabel("Leon-Tonyä¸²å£");
 	
 	private JPasswordField pwdField=new JPasswordField(30);
 	
-	private JButton jButton = new JButton("È·¶¨") ;
+	private JButton jButton = new JButton("ç¡®è®¤") ;
 	
 	public LoginUI() {
-		this.setTitle("»¶Ó­Ò³Ãæ");
+		this.setTitle("æ¬¢è¿ç•Œé¢");
 		this.setSize(500, 500);
 		this.setVisible(true);
 		this.setResizable(true);
@@ -36,10 +36,10 @@ public class LoginUI extends JFrame{
 		this.setLayout(null);
 		
 		title.setBounds(180, 20, 160, 60);
-		title.setFont(new Font("¿¬Ìå", Font.BOLD, 25));
+		title.setFont(new Font("æ¥·ä½“", Font.BOLD, 25));
 		
 		password.setBounds(60, 100, 120, 60);
-		password.setFont(new Font("¿¬Ìå", Font.BOLD, 15));
+		password.setFont(new Font("æ¥·ä½“", Font.BOLD, 15));
 		
 		pwdField.setBounds(60, 160, 150, 40);
 		
@@ -53,16 +53,15 @@ public class LoginUI extends JFrame{
 		
 		jButton.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("deprecation")
 				String pwd = pwdField.getText() ;
 				if(pwd.equals("123456")) {
 					LoginUI.this.setVisible(false);
-					JOptionPane.showMessageDialog(new JFrame(), "½øÈëÖ÷Ò³.....");
+					JOptionPane.showMessageDialog(new JFrame(), "æ¬¢è¿è¿›å…¥ç³»ç»Ÿ.....");
 					new HomeUI() ;	
 				}else {
-					JOptionPane.showMessageDialog(new JFrame(), "ÑéÖ¤´íÎó,ÇëÖØÊÔ.....");
+					JOptionPane.showMessageDialog(new JFrame(), "éªŒè¯ç é”™è¯¯ï¼Œè¯·æ£€æŸ¥é‡æ–°è¾“å…¥.....");
 					pwdField.setText("");
 				}
 			}

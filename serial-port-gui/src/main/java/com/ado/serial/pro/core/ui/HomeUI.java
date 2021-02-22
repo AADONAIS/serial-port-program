@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
 /**
- * Ïµ½yÖ÷í“
+ * Ïµï¿½yï¿½ï¿½ï¿½
  * @author ADONAIS
  *
  */
@@ -20,7 +20,7 @@ public class HomeUI extends JFrame{
 	
 
 	public HomeUI() {
-		this.setTitle("Ö÷Ò³");
+		this.setTitle("ä¸»é¡µ");
 		this.setSize(1000, 800);
 		this.setVisible(true);
 		this.setResizable(true);
