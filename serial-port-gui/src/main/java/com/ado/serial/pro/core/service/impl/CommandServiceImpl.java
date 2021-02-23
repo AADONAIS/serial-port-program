@@ -26,9 +26,7 @@ public class CommandServiceImpl implements CommandService {
             new Thread(new inputStreamThread(inputStream)).start();
             new Thread(new inputStreamThread(errorStream)).start();
             p.waitFor();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
