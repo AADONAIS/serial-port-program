@@ -1,6 +1,7 @@
 package com.ado.serial.pro.core.service.impl;
 
 import com.ado.serial.pro.core.service.ExecuteService;
+import com.ado.serial.pro.core.ui.HomeUI;
 import enums.SerialPortConfigEnum;
 
 import java.util.ArrayList;
@@ -10,11 +11,16 @@ import java.util.Map;
 
 public class ExecuteServiceImpl implements ExecuteService {
 
-    public static void main(String[] args) {
-        HashMap<String, String> map = new HashMap<String, String>();
-        ExecuteService executeService = new ExecuteServiceImpl();
-        executeService.dealData(map);
+    private HomeUI homeUI;
+    public ExecuteServiceImpl(HomeUI homeUI) {
+        this.homeUI=homeUI;
     }
+
+//    public static void main(String[] args) {
+//        HashMap<String, String> map = new HashMap<String, String>();
+//        ExecuteService executeService = new ExecuteServiceImpl();
+//        executeService.dealData(map);
+//    }
 
     private static final List<SerialPortConfigEnum> keys = new ArrayList<SerialPortConfigEnum>() {{
         add(SerialPortConfigEnum.PARITY_CHECK);
@@ -28,7 +34,7 @@ public class ExecuteServiceImpl implements ExecuteService {
 
 
     public boolean dealData(Map<String, String> map) {
-        CommandServiceImpl commandServiceImpl = new CommandServiceImpl();
+        CommandServiceImpl commandServiceImpl = new CommandServiceImpl(homeUI);
         String params = spliceParams(map);
         String command = commoandCons+params;
         System.out.println("#####");
@@ -45,8 +51,12 @@ public class ExecuteServiceImpl implements ExecuteService {
 
         for (SerialPortConfigEnum key : keys) {
             if (map.containsKey(key.getCode())){
-                String value = map.get(key);
-                out+=" --"+key+"="+value+" ";
+                String value = map.get(key.getCode());
+                if (value.equals("无")){
+                    continue;
+                }
+
+                out+=" --"+key.getCode()+"="+value+" ";
             }
         }
 
