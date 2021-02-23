@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 基本信息 -->
+    <name>serial-port-program</name>
+    <packaging>pom</packaging>
+
+    <groupId>cn.adonais</groupId>
+    <artifactId>serial-port-program</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.version>1.0</project.version>
+    </properties>
+
+    <!-- 模块说明：这里声明多个子模块 -->
+    <modules>
+        <module>serial-port-common</module>
+        <module>serial-port-gui</module>
+        <module>serial-port-core</module>
+    </modules>
+
+    <dependencies>
+    </dependencies>
+</project>

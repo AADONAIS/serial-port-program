@@ -20,6 +20,11 @@
             <version>1.0</version>
         </dependency>
         <dependency>
+            <groupId>cn.adonais</groupId>
+            <artifactId>serial-port-core</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.purejavacomm</groupId>
             <artifactId>purejavacomm</artifactId>
             <version>1.0.1.RELEASE</version>
