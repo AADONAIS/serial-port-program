@@ -1,7 +1,7 @@
 package com.ado.serial.pro.core.ui;
 
-import com.ado.serial.pro.core.service.SerialPortService;
-import com.ado.serial.pro.core.service.impl.SerialPortServiceImpl;
+import com.ado.serial.pro.core.service.ExecuteService;
+import com.ado.serial.pro.core.service.impl.ExecuteServiceImpl;
 import enums.SerialPortConfigEnum;
 
 import javax.swing.*;
@@ -162,8 +162,8 @@ public class HomeUI extends JFrame{
 				map.put(SerialPortConfigEnum.STOP_BITS.getCode(), stopBitsChoiceSelected) ;
 				map.put(SerialPortConfigEnum.DATA_BITS.getCode(), dataBitsChoiceSelected) ;
 
-				SerialPortService serialPortService = new SerialPortServiceImpl() ;
-				serialPortService.dealData(map) ;
+				ExecuteService executeService = new ExecuteServiceImpl() ;
+				executeService.dealData(map) ;
 
 
 

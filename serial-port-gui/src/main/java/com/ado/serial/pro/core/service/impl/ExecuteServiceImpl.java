@@ -1,17 +1,19 @@
 package com.ado.serial.pro.core.service.impl;
 
-import com.ado.serial.pro.core.service.SerialPortService;
+import com.ado.serial.pro.core.service.ExecuteService;
 import enums.SerialPortConfigEnum;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SerialPortServiceImpl implements SerialPortService {
+public class ExecuteServiceImpl implements ExecuteService {
 
     public static void main(String[] args) {
-        CommandService commandService = new CommandService();
-        commandService.exec("");
+        HashMap<String, String> map = new HashMap<String, String>();
+        ExecuteService executeService = new ExecuteServiceImpl();
+        executeService.dealData(map);
     }
 
     private static final List<SerialPortConfigEnum> keys = new ArrayList<SerialPortConfigEnum>() {{
@@ -23,7 +25,11 @@ public class SerialPortServiceImpl implements SerialPortService {
     }};
 
     public boolean dealData(Map<String, String> map) {
-        return false;
+        CommandServiceImpl commandServiceImpl = new CommandServiceImpl();
+        String command = "cmd /c java  -jar";
+        String[] cmds = { "cmd", "/c", command };
+        commandServiceImpl.exec(cmds);
+        return true;
     }
 
 

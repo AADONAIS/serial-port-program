@@ -2,6 +2,8 @@ package com.ado.serial.pro.core.service.impl;
 
 
 
+import com.ado.serial.pro.core.service.CommandService;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -12,14 +14,15 @@ import java.nio.charset.StandardCharsets;
  * @version 1.0
  * @date 2021/2/23 11:54
  **/
-public class CommandService {
+public class CommandServiceImpl implements CommandService {
 
-    public void exec(String command){
+    @Override
+    public void exec(String[] command){
         Runtime run =Runtime.getRuntime();
         try {
-            Process p = run.exec("ping 127.0.0.1");
-            InputStream ins= p.getInputStream();
-            InputStream ers= p.getErrorStream();
+            Process p = run.exec(command);
+//            InputStream ins= p.getInputStream();
+            InputStream ins= p.getErrorStream();
             new Thread(new inputStreamThread(ins)).start();
             p.waitFor();
         } catch (IOException e) {
