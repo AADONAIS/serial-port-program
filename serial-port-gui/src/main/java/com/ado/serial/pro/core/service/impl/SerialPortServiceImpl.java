@@ -9,6 +9,10 @@ import java.util.Map;
 
 public class SerialPortServiceImpl implements SerialPortService {
 
+    public static void main(String[] args) {
+        CommandService commandService = new CommandService();
+        commandService.exec("");
+    }
 
     private static final List<SerialPortConfigEnum> keys = new ArrayList<SerialPortConfigEnum>() {{
         add(SerialPortConfigEnum.PARITY_CHECK);
@@ -21,4 +25,9 @@ public class SerialPortServiceImpl implements SerialPortService {
     public boolean dealData(Map<String, String> map) {
         return false;
     }
+
+
+
+
+
 }
