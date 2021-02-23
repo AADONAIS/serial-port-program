@@ -24,14 +24,32 @@ public class ExecuteServiceImpl implements ExecuteService {
         add(SerialPortConfigEnum.DATA_BITS);
     }};
 
+    private static final String commoandCons = "java -jar .\\classes\\serial-port-core-1.0.jar";
+
+
     public boolean dealData(Map<String, String> map) {
         CommandServiceImpl commandServiceImpl = new CommandServiceImpl();
-        String command = "java -jar .\\classes\\serial-port-core-1.0.jar";
+        String params = spliceParams(map);
+        String command = commoandCons+params;
         String[] cmds = { "cmd", "/c", command };
         commandServiceImpl.exec(cmds);
         return true;
     }
 
+
+    private String spliceParams(Map<String,String> map){
+        String out="";
+
+        for (SerialPortConfigEnum key : keys) {
+            if (map.containsKey(key.getCode())){
+                String value = map.get(key);
+                out+=" --"+key+"="+value+" ";
+            }
+        }
+
+        return out;
+
+    }
 
 
 

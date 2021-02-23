@@ -2,15 +2,18 @@ package enums;
 
 public enum SerialPortConfigEnum {
 
-    DATA_BITS("dataBits" , "数据位"),
 
-    STOP_BITS("stopBits" , "停止位"),
 
-    BAUD_RATE("baudRate" , "波特率"),
+    BAUD_RATE("port.baud.rate" , "波特率"),
 
-    PARITY_CHECK("parityCheck" , "奇偶校验"),
+    SERIAL_NUMBER("port.name" , "串口号"),
 
-    SERIAL_NUMBER("serialNumber" , "串口号");
+    DATA_BITS("port.data.bits" , "数据位"),
+
+    STOP_BITS("port.stop.bits" , "停止位"),
+
+    PARITY_CHECK("port.parity.check" , "奇偶校验");
+
 
 
     private String code ;

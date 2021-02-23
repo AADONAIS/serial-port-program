@@ -40,7 +40,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.ado.serial.pro.core.service.impl.ExecuteServiceImpl</mainClass>
+                            <mainClass>com.ado.serial.pro.core.AppMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
