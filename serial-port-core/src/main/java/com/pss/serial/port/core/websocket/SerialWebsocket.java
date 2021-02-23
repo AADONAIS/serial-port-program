@@ -97,15 +97,10 @@ public class SerialWebsocket {
         log.info("[{}]", "开启websocket , 开始监听数据");
         try {
             while (true) {
-//            log.info("into while .....");
                 try {
                     inputStream = serialPort.getInputStream();
 
                     StringBuilder stringBuilder = new StringBuilder();
-//                while (inputStream.available()!=0) {
-//                    int read = inputStream.read();
-//                    str += new String(readAarray,0, readAarray.length).trim();
-//                }
                     while (true){
                         inputStream.read(readAarray);
                         stringBuilder.append(new String(readAarray));
@@ -113,16 +108,6 @@ public class SerialWebsocket {
                             break;
                         }
                     }
-//                    inputStream.close();
-//                    String s = bytesToHexString(readAarray);
-//                    for (byte b : readAarray) {
-//                        stringBuilder.append(b);
-//                    }
-
-//                    if (StringUtils.isBlank(stringBuilder)) continue;
-
-                    // 将读出的字符数组数据，直接转换成十六进制。
-//                StringToHex.printHexString(readB);
 
                     String base = stringBuilder.toString();
                     base=base.replaceAll("\r\n|\r|\n", "");
@@ -133,16 +118,9 @@ public class SerialWebsocket {
                         continue;
                     }
                     String str = matcher.group(0);
-//                    String str = stringBuilder.toString();
-
-
-//                log.info("transform data ....");
                     System.out.println("input:["+base+"]"+",out:["+str+"]");
-//                log.info("接收到的重量为:" + str);
                     Thread.sleep(10);
                     SerialWebsocket.SendMessage(session, str);
-//                log.info("send message ......");
-//                log.info("[{}]" , "发送消息成功,消息内容为:" + new String(readB));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

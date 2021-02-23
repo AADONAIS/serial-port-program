@@ -21,9 +21,10 @@ public class CommandServiceImpl implements CommandService {
         Runtime run =Runtime.getRuntime();
         try {
             Process p = run.exec(command);
-//            InputStream ins= p.getInputStream();
-            InputStream ins= p.getErrorStream();
-            new Thread(new inputStreamThread(ins)).start();
+            InputStream inputStream= p.getInputStream();
+            InputStream errorStream= p.getErrorStream();
+            new Thread(new inputStreamThread(inputStream)).start();
+            new Thread(new inputStreamThread(errorStream)).start();
             p.waitFor();
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,14 +36,8 @@ public class CommandServiceImpl implements CommandService {
 
     static class inputStreamThread implements Runnable{
         private InputStream ins = null;
-        private BufferedReader bfr = null;
         public inputStreamThread(InputStream ins){
             this.ins = ins;
-            try {
-                this.bfr = new BufferedReader(new InputStreamReader(ins,"gb2312"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
         }
         @Override
         public void run() {
@@ -50,24 +45,8 @@ public class CommandServiceImpl implements CommandService {
             byte[] b = new byte[2];
             int num = 0;
             try {
-//                String outStr ="";
-//                while(ins.available()>0){
-//                    StringBuilder stringBuilder = new StringBuilder();
-//                    while (true) {
-//                        int read = ins.read(b);
-//                        String tempStr = new String(b, "gb2312");
-////                        byte[] bytes = tempStr.getBytes(StandardCharsets.UTF_8);
-////                        tempStr = new String(bytes, StandardCharsets.UTF_8);
-//
-//                        stringBuilder.append(tempStr);
-//                        if (stringBuilder.toString().contains("\r\n")){
-//                            outStr=stringBuilder.toString();
-//                            break;
-//                        }
-//
-//                    }
-//                    System.out.print(outStr);
-//                }
+                BufferedReader bfr=new BufferedReader(new InputStreamReader(ins,"gb2312"));
+
                 char ch;
                 while ((num = bfr.read()) != -1) {
                     ch = (char) num;

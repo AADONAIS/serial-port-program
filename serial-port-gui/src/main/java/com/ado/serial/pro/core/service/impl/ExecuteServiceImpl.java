@@ -26,7 +26,7 @@ public class ExecuteServiceImpl implements ExecuteService {
 
     public boolean dealData(Map<String, String> map) {
         CommandServiceImpl commandServiceImpl = new CommandServiceImpl();
-        String command = "cmd /c java  -jar";
+        String command = "java -jar .\\classes\\serial-port-core-1.0.jar";
         String[] cmds = { "cmd", "/c", command };
         commandServiceImpl.exec(cmds);
         return true;
