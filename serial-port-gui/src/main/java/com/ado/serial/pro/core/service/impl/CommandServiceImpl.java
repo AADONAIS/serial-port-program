@@ -41,8 +41,6 @@ public class CommandServiceImpl implements CommandService {
         }
         @Override
         public void run() {
-            String line = null;
-            byte[] b = new byte[2];
             int num = 0;
             try {
                 BufferedReader bfr=new BufferedReader(new InputStreamReader(ins,"gb2312"));
