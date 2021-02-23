@@ -31,6 +31,9 @@ public class ExecuteServiceImpl implements ExecuteService {
         CommandServiceImpl commandServiceImpl = new CommandServiceImpl();
         String params = spliceParams(map);
         String command = commoandCons+params;
+        System.out.println("#####");
+        System.out.println(command);
+        System.out.println("#####");
         String[] cmds = { "cmd", "/c", command };
         commandServiceImpl.exec(cmds);
         return true;

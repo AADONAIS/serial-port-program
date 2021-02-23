@@ -10,7 +10,7 @@ public class SerialportProgramApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SerialportProgramApplication.class, args);
-        log.info("[{}] : [{}]" , "系统启动模块" , "串口监听程序启动....");
+        log.info("[{}] : [{}],args:[{}]" , "系统启动模块" , "串口监听程序启动....",args);
     }
 
 }
