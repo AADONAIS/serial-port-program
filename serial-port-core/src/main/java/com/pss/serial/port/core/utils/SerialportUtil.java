@@ -1,10 +1,7 @@
 package com.pss.serial.port.core.utils;
 
 import com.pss.serial.port.core.exception.BusinessException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-import purejavacomm.*;
+import gnu.io.*;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -73,10 +73,9 @@ public class HomeUI extends JFrame {
         parityCheckChoice.add("无");
         parityCheckChoice.add("有");
 
-        stopBitsChoice.add("5");
-        stopBitsChoice.add("6");
-        stopBitsChoice.add("7");
-        stopBitsChoice.add("8");
+        stopBitsChoice.add("1");
+        stopBitsChoice.add("1.5");
+        stopBitsChoice.add("2");
 
         dataBitsChoice.add("8");
         dataBitsChoice.add("16");
@@ -139,7 +138,7 @@ public class HomeUI extends JFrame {
 
         this.add(currentStatus);
 
-        ExecuteService executeService = new ExecuteServiceImpl(this);
+        final ExecuteService executeService = new ExecuteServiceImpl(this);
 
 
         startBtn.addActionListener(new ActionListener() {
@@ -155,6 +154,7 @@ public class HomeUI extends JFrame {
                 System.out.println("串口号为:" + serialNumberChoiceSelected + "\n波特率为:" + baudRateChoiceSelected + "\n奇偶校验:" + parityCheckChoiceSelected +
                         "\n停止位:" + stopBitsChoiceSelected + "\n数据位:" + dataBitsChoiceSelected);
 
+//                startBtn.
 
                 Map<String, String> map = new HashMap<String, String>();
                 map.put(SerialPortConfigEnum.PARITY_CHECK.getCode(), parityCheckChoiceSelected);
@@ -173,10 +173,7 @@ public class HomeUI extends JFrame {
     }
 
     public void changeDataShow(Character msg){
-//        dataShow.append("\r\n");
-        synchronized (this){
             dataShow.append(msg.toString());
-        }
     }
 
 

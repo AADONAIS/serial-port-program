@@ -13,10 +13,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
-      <module name="serial-port-common" target="8" />
-      <module name="serial-port-core" target="8" />
-      <module name="serial-port-gui" target="8" />
-      <module name="serial-port-program" target="8" />
+      <module name="serial-port-common" target="1.5" />
+      <module name="serial-port-core" target="1.8" />
+      <module name="serial-port-gui" target="1.5" />
+      <module name="serial-port-program" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

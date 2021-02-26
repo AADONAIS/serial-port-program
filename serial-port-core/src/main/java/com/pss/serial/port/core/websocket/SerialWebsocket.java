@@ -4,13 +4,13 @@ package com.pss.serial.port.core.websocket;
 import com.pss.serial.port.core.controller.WebSocketController;
 import com.pss.serial.port.core.exception.BusinessException;
 import com.pss.serial.port.core.utils.SpringUtil;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+import gnu.io.UnsupportedCommOperationException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.web.server.PortInUseException;
 import org.springframework.stereotype.Component;
-import purejavacomm.CommPortIdentifier;
-import purejavacomm.PortInUseException;
-import purejavacomm.SerialPort;
-import purejavacomm.UnsupportedCommOperationException;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -72,7 +72,6 @@ public class SerialWebsocket {
         }
 
         if (port == null) {
-//            System.out.println("没有获取到需要的串口");
             log.info("没有获取到需要的串口");
             throw new BusinessException("500", "没有获取到串口");
         }
@@ -83,6 +82,8 @@ public class SerialWebsocket {
             // 获取串口的输入流对象
 //            inputStream = serialPort.getInputStream();
         } catch (PortInUseException e) {
+            e.printStackTrace();
+        } catch (gnu.io.PortInUseException e) {
             e.printStackTrace();
         }
 
